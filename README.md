@@ -1,6 +1,6 @@
 # Application Request Profiling Tool
 
-This tool can perform load test on API requests in local environment. It creates a docker container and uses [wrk2](https://github.com/giltene/wrk2) for the load test. Each request will have its own result. There will also be an [HdrHistogram](http://hdrhistogram.org/) based on statistics from all requests.
+This tool can perform load test on API requests in local environment. It creates a docker container and uses [wrk2](https://github.com/giltene/wrk2) for the load test. Each request will have its own result. There will also be an [HdrHistogram](http://hdrhistogram.org/) based on statistics from all requests. More information in [wiki](https://wiki.openbet.com/display/SBT/API+request+profiling).
 
 ## Setup
 #### 1. Check out scripts
