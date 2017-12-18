@@ -1,0 +1,60 @@
+#!/bin/bash
+
+echo "==========Test Begin===========" >&2
+echo "Reading config...." >&2
+source ./config
+echo "Threads:     $THREADS" >&2
+echo "Connections: $CONNECTIONS" >&2
+echo "Duration:    $DURATION" >&2
+echo "Rate:        $RATE" >&2
+
+echo "Generating AuthToken...." >&2
+curl -d@auth/reqAccountValidate1.xml http://web/sportsbet/oxiapi > auth/authtoken_response
+AUTHTOKEN=$(grep '<token' auth/authtoken_response | cut -f2 -d">"|cut -f1 -d"<")
+echo "AuthToken: $AUTHTOKEN" >&2
+
+TOTAL=0
+TIMESTAMP=$(date +%Y%m%d_%H%M)
+FOLDER=/tmp/request_lt_result_$TIMESTAMP
+mkdir -p $FOLDER
+
+# run wrk
+echo "===============================" >&2
+while read switch auth request parameter name ;
+do
+	if [ "$switch" == "1" ]; then
+		if [ "$auth" == "1" ] && [ -z ${AUTHTOKEN+x} ]; then
+			echo "AuthToken is not set. Skip request needs authentication" >&2
+			continue
+		fi
+
+		echo "Testing $request" >&2
+		CMD="./wrk -t$THREADS -c$CONNECTIONS -d$DURATION -R$RATE -H 'AuthToken: $AUTHTOKEN' -s lua/$parameter --latency $URL_PREFIX$request"
+
+		if [ "$SHOW_ON_TERMINAL" == "1" ]; then
+			echo "Command: $CMD" >&2
+			eval $CMD
+		else
+			eval $CMD > $FOLDER/$name 
+		fi
+		((TOTAL++))
+	fi
+done < ./profiles/obmw-requests.dat
+
+echo "===============================" >&2
+echo "$TOTAL request(s) tested in total" >&2
+
+if [ "$SHOW_ON_TERMINAL" == "1" ]; then
+	echo "Skip drawing HdrHistogram as result is not saved." >&2
+else
+	echo "Creating report...." >&2
+	# run gnuplot
+	input=""
+	for result in $FOLDER/*
+	do
+	    input="$input $result"
+	done
+	./make_percentile_plot -o $FOLDER/HdrHistogram $input
+fi
+
+echo "=============Done==============" >&2
