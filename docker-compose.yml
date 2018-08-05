@@ -1,0 +1,10 @@
+version: "2.4"
+
+services:
+    application:
+        build: wrk2
+        volumes:
+            - ./output:/tmp/results/
+            - ./src:/opt/profiler/
+            - ./profiles:/opt/profiler/profiles
+        tty: true
