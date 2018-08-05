@@ -1,10 +1,17 @@
 version: "2.4"
 
 services:
-    application:
+    wrk2:
         build: wrk2
         volumes:
             - ./output:/tmp/results/
             - ./src:/opt/profiler/
             - ./profiles:/opt/profiler/profiles
         tty: true
+    # Sample app is used for simulating request delays.
+    sample-app:
+        build: sample-app
+        volumes:
+          - ./sample-app:/usr/src/app
+        ports:
+          - 80:80

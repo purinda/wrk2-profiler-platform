@@ -3,7 +3,7 @@ FROM gliderlabs/alpine:3.6
 USER root
 
 # Install required packages
-RUN apk add --update alpine-sdk openssl-dev gnuplot curl
+RUN apk add --update bash alpine-sdk openssl-dev gnuplot curl
 RUN apk add --no-cache git
 
 # Build the latest wrk2
@@ -12,3 +12,5 @@ RUN cp wrk2/wrk /usr/local/bin
 
 # Define working directory
 WORKDIR /opt/profiler
+
+ENTRYPOINT ["/bin/sh"]
