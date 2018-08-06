@@ -8,6 +8,19 @@ import random
 app = Flask(__name__)
 api = Api(app)
 
+def random_delay(min_ms=0, max_ms=1000):
+    '''
+    Sleep function to halt parent thread of a request which will be handled
+    using the sample application. Default: sleep between 0 and 1 seconds.
+
+    min_ms minimum number of miliseconds to sleep
+    max_ms maximum number of miliseconds to sleep
+    '''
+
+    delay = random.randrange(min_ms, max_ms)
+    time.sleep(delay / 1000)
+    return delay
+
 class Auth(Resource):
     def get(self):
         return {
@@ -23,21 +36,15 @@ class AlmostNoDelay(Resource):
 
 class RandomDelayRange1(Resource):
     def get(self):
-        delay = random.randrange(1, 10) / 10
-        time.sleep(delay)
-
         return {
-            'delay': delay,
+            'delay': random_delay(500, 1500),
             'result': ['success']
         }
 
 class RandomDelayRange2(Resource):
     def get(self):
-        delay = random.randrange(9, 10) / 10
-        time.sleep(delay)
-
         return {
-            'delay': delay,
+            'delay': random_delay(1000, 2500),
             'result': ['success']
         }
 

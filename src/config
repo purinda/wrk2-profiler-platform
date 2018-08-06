@@ -24,9 +24,9 @@
 #                        in requests/sec (total)
 #                        [Required Parameter]
 CONNECTIONS=5
-DURATION=8s
-THREADS=1
-RATE=1
+DURATION=20s
+THREADS=2
+RATE=100
 
 # Domain name and path for request
 URL_PREFIX=http://sbt.local:18080/sportsbet/
