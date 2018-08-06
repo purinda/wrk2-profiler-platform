@@ -51,7 +51,7 @@ function profile() {
         fi
 
         eval ${cmd} > ${output_dir}/${calls__name[$idx]}.log
-        console
+        console ""
         ((total++))
     done
 
