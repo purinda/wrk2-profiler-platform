@@ -1,0 +1,21 @@
+--
+base_url: http://127.0.0.1
+profiler:
+  threads: 2
+  connections: 10
+  rate: 100
+  duration: 20
+
+calls:
+  -
+    active: 1
+    auth: 0
+    path: /noDelay
+    script: sample-app.lua
+    histogram: no-delay.log
+  -
+    active: 1
+    auth: 0
+    path: /delayRaneg1
+    script: sample-app.lua
+    histogram: delay-range-1.log

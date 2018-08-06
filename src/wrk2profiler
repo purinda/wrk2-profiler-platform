@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# wrk2 profiler application entrypoint
+
+# Required for relative references to config files
+app=`python -c "import os; print(os.path.dirname(os.path.realpath(\"$0\")))"`
+
+# Name/version
+name="Wrk2 Profiler"
+version=`cat ${app}/var/version`
+
+# Runs the main app
+source "${app}/src/cli/cli.sh"
+cli_parse "$@"
