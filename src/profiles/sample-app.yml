@@ -1,5 +1,8 @@
 --
-base_url: http://127.0.0.1
+name: sample-app-profiling
+debug: 1
+base_url: http://host.docker.internal
+lua_callback: src/profiles/lua/sample-app.lua
 profiler:
   threads: 2
   connections: 10
@@ -8,7 +11,7 @@ profiler:
 
 calls:
   -
-    active: 1
+    active: 0
     auth: 0
     path: /noDelay
     script: sample-app.lua

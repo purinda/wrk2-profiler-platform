@@ -7,7 +7,6 @@ function profile() {
     profiler_fn=$1
 
     # Parse the input yaml file
-    parse_yaml $profiler_fn
     create_variables $profiler_fn
 
     note "Reading '$profiler_fn' for configuration."
@@ -21,47 +20,50 @@ function profile() {
     # AUTHTOKEN=$(grep '<token' auth/authtoken_response | cut -f2 -d">"|cut -f1 -d"<")
     # console "AuthToken: $AUTHTOKEN"
 
-    TOTAL=0
-    TIMESTAMP=$(date +%Y%m%d_%H%M)
-    FOLDER=/tmp/results/profiling_at_$TIMESTAMP
-    mkdir -p $FOLDER
+    total=0
+    timestamp=$(date +%Y%m%d_%H%M)
+    output_dir=/tmp/results/${name}${timestamp}
+    mkdir -p ${output_dir}
 
-    # Run wrk
-    while read switch auth request parameter name ;
+    # Run wrk for each item(URL) in the profile
+    for item in "${calls__active[@]}"
     do
-        if [ "$switch" == "1" ]; then
-            if [ "$auth" == "1" ] && [ -z ${AUTHTOKEN+x} ]; then
-                console "AuthToken is not set. Skip request needs authentication"
-                continue
-            fi
-
-            note "Testing $request"
-            CMD="wrk -t$THREADS -c$CONNECTIONS -d$DURATION -R$RATE -H 'AuthToken: $AUTHTOKEN' -s lua/$parameter --latency $URL_PREFIX$request"
-
-            if [ "$SHOW_ON_TERMINAL" == "1" ]; then
-                console "Command: $CMD"
-                eval $CMD
-            else
-                eval $CMD > $FOLDER/$name
-            fi
-            ((TOTAL++))
+        if [ "${calls__active[$item]}" == "0" ]; then
+            continue
         fi
-    done < $profiler_fn
 
-    note "$TOTAL request(s) tested in total"
+        # If authentication is required
+        if [ "$auth" == "1" ] && [ -z ${AUTHTOKEN+x} ]; then
+            console "AuthToken is not set. Skip request needs authentication"
+            continue
+        fi
 
-    if [ "$SHOW_ON_TERMINAL" == "1" ]; then
+        note "Testing ${calls__path[$item]}"
+        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -H 'AuthToken: ${AUTHTOKEN}' -s $lua_callback --latency ${base_url}${request}"
+
+        if [ "$debug" == "1" ]; then
+            note "Shell cmd: \n\t \$ ${cmd}"
+            eval ${cmd}
+        else
+            eval ${cmd} > ${output_dir}/${name}
+        fi
+        ((total++))
+    done
+
+    note "$total request(s) tested in total"
+
+    if [ "${debug}" == "1" ]; then
         note "Skip drawing HdrHistogram as result is not saved."
     else
         note "Producing histogram.."
         input=""
-        for result in $FOLDER/*
+        for result in ${output_dir}/*
         do
             input="$input $result"
         done
 
         # Run gnuplot
-        ${app}/src/cli/make_percentile_plot -o $FOLDER/histogram.svg $input
+        ${app}/src/cli/make_percentile_plot -o ${output_dir}/histogram.svg $input
     fi
 
     console "Done"
