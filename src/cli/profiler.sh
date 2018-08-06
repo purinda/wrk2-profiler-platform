@@ -9,11 +9,14 @@ function profile() {
     # Parse the input yaml file
     create_variables $profiler_fn
 
-    note "Reading '$profiler_fn' for configuration."
-    console "Threads:     $profiler_threads"
-    console "Connections: $profiler_connections"
-    console "Duration:    $profiler_duration"
-    console "Rate:        $profiler_rate"
+    note "Running profile '$profiler_fn'"
+
+    if [ "${debug}" == "1" ]; then
+        console "Threads:     $profiler_threads"
+        console "Connections: $profiler_connections"
+        console "Duration:    $profiler_duration"
+        console "Rate:        $profiler_rate"
+    fi
 
     # note "Generating auth token.."
     # curl -d@auth/reqAccountValidate1.xml http://sample-app/ > auth/authtoken_response
@@ -25,10 +28,10 @@ function profile() {
     output_dir=/tmp/results/${name}${timestamp}
     mkdir -p ${output_dir}
 
-    # Run wrk for each item(URL) in the profile
-    for item in "${calls__active[@]}"
+    # Run wrk for each URL in the profile
+    for idx in $( seq 0 ${calls__active[@]} )
     do
-        if [ "${calls__active[$item]}" == "0" ]; then
+        if [ "${calls__active[$idx]}" == "0" ]; then
             continue
         fi
 
@@ -38,28 +41,29 @@ function profile() {
             continue
         fi
 
-        note "Testing ${calls__path[$item]}"
-        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -H 'AuthToken: ${AUTHTOKEN}' -s $lua_callback --latency ${base_url}${request}"
+        note "Testing ${calls__name[$idx]}"
+        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -H 'AuthToken: ${AUTHTOKEN}' -s ${calls__script[$idx]} --latency ${base_url}${calls__path[$idx]}"
 
-        if [ "$debug" == "1" ]; then
-            note "Shell cmd: \n\t \$ ${cmd}"
-            eval ${cmd}
-        else
-            eval ${cmd} > ${output_dir}/${name}
+        if [ "${debug}" == "1" ]; then
+            note "URL: ${base_url}${calls__path[$idx]}"
+            note "Shell Cmd: ${cmd}"
         fi
+
+        eval ${cmd} > ${output_dir}/${calls__name[$idx]}.log
         ((total++))
     done
 
-    note "$total request(s) tested in total"
+    note "${total} request(s) tested in total"
 
-    if [ "${debug}" == "1" ]; then
+    # Histogram
+    if [ "${histogram}" == "0" ]; then
         note "Skip drawing HdrHistogram as result is not saved."
     else
         note "Producing histogram.."
         input=""
         for result in ${output_dir}/*
         do
-            input="$input $result"
+            input="${input} ${result}"
         done
 
         # Run gnuplot

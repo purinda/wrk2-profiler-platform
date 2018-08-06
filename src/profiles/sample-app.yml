@@ -1,24 +1,24 @@
 --
 name: sample-app-profiling
 debug: 1
+histogram: 1
 base_url: http://host.docker.internal
-lua_callback: src/profiles/lua/sample-app.lua
 profiler:
-  threads: 2
+  threads: 1
   connections: 10
-  rate: 100
-  duration: 20
+  rate: 10
+  duration: 10
 
 calls:
   -
-    active: 0
-    auth: 0
-    path: /noDelay
-    script: sample-app.lua
-    histogram: no-delay.log
-  -
+    name: no_delay
     active: 1
     auth: 0
-    path: /delayRaneg1
-    script: sample-app.lua
-    histogram: delay-range-1.log
+    path: /noDelay
+    script: src/profiles/lua/sample-app.lua
+  -
+    name: delay_range_1
+    active: 1
+    auth: 0
+    path: /delayRange1
+    script: src/profiles/lua/sample-app.lua
