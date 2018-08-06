@@ -1,4 +1,9 @@
-[ $LOGGER_SH ] && return || LOGGER_SH=1
+[ $YAML_SH ] && return || YAML_SH=1
+
+function create_variables() {
+    local yaml_file="$1"
+    eval "$(parse_yaml "$yaml_file")"
+}
 
 # Based on https://gist.github.com/pkuczynski/8665367
 function parse_yaml() {

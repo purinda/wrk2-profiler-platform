@@ -28,8 +28,13 @@ function console_n() {
     ${TXT_BIN} "$1"
 }
 
-# Displays text highlighted; no new-line
+# Displays text highlighted; new-line
 function note() {
+    ${TXT_BIN} "\e[94m$1\e[0m\n"
+}
+
+# Displays text highlighted; no new-line
+function note_n() {
     ${TXT_BIN} "\e[94m$1\e[0m"
 }
 
