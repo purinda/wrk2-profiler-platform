@@ -55,14 +55,11 @@ if [ $helpFlagFound -eq 1 ]; then
 	exit 255
 fi
 
-echo "1.0			0.0	0%" 		> ./xlabels.dat
-echo "10.0			0.0	90%" 		>> ./xlabels.dat
-echo "100.0			0.0	99%" 		>> ./xlabels.dat
-echo "1000.0		0.0	99.9%" 		>> ./xlabels.dat
-echo "10000.0		0.0	99.99%" 	>> ./xlabels.dat
-echo "100000.0		0.0	99.999%" 	>> ./xlabels.dat
-echo "1000000.0		0.0	99.9999%" 	>> ./xlabels.dat
-echo "10000000.0	0.0	99.99999%" 	>> ./xlabels.dat
+echo "1.0		0.0	0%" 		>  ./xlabels.dat
+echo "10.0		0.0	90%" 		>> ./xlabels.dat
+echo "100.0		0.0	99%" 		>> ./xlabels.dat
+echo "1000.0	0.0	99.9%" 		>> ./xlabels.dat
+echo "10000.0	0.0	99.99%" 	>> ./xlabels.dat
 
 IndividualFilePlotCommands="'./xlabels.dat' with labels center offset 0, 1.5 point"
 for file in $FILES; do
@@ -80,8 +77,11 @@ message command will be:
 message $IndividualFilePlotCommands
 
 (
-    echo "#plot commands"
-    echo "set terminal png size 1280,720"
+	echo "set title 'Request Latency Percentile Distribution'"
+	echo "set ylabel 'Time (msec)'"
+	echo "set xlabel 'Percentile of Reqs.'"
+	echo "set grid"
+    echo "set terminal svg size 1280,720"
     if [ $OUTPUT_FILENAME ]; then
         echo "set output '$OUTPUT_FILENAME'"
     fi

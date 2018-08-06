@@ -6,7 +6,6 @@ services:
         volumes:
             - ./output:/tmp/results/
             - ./src:/opt/profiler/
-            - ./profiles:/opt/profiler/profiles
         tty: true
     # Sample app is used for simulating request delays.
     sample-app:

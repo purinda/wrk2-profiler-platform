@@ -29,7 +29,7 @@ THREADS=2
 RATE=100
 
 # Domain name and path for request
-URL_PREFIX=https://www.google.com.au
+URL_PREFIX=http://sample-app
 
 # Print output for each requests
 SHOW_ON_TERMINAL=0

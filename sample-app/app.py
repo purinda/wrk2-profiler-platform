@@ -1,27 +1,51 @@
 # Import framework
 from flask import Flask
 from flask_restful import Resource, Api
-from time import sleep
+import time
 import random
 
 # Instantiate the app
 app = Flask(__name__)
 api = Api(app)
 
+class Auth(Resource):
+    def get(self):
+        return {
+            'token': hash(time.time()),
+            'result': ['success']
+        }
+
+class AlmostNoDelay(Resource):
+    def get(self):
+        return {
+            'result': ['success']
+        }
 
 class RandomDelayRange1(Resource):
     def get(self):
         delay = random.randrange(1, 10) / 10
-        sleep(delay)
+        time.sleep(delay)
 
         return {
             'delay': delay,
-            'result': ['Success']
+            'result': ['success']
         }
 
+class RandomDelayRange2(Resource):
+    def get(self):
+        delay = random.randrange(9, 10) / 10
+        time.sleep(delay)
+
+        return {
+            'delay': delay,
+            'result': ['success']
+        }
 
 # Create routes
+api.add_resource(Auth, '/auth')
+api.add_resource(AlmostNoDelay, '/noDelay')
 api.add_resource(RandomDelayRange1, '/delayRange1')
+api.add_resource(RandomDelayRange2, '/delayRange2')
 
 # Run the application
 if __name__ == '__main__':
