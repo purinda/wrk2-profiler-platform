@@ -2,7 +2,7 @@
 name: sample-app-profiling
 debug: 1
 histogram: 1
-base_url: http://host.docker.internal
+base_url: http://sample-app
 profiler:
   threads: 1
   connections: 10

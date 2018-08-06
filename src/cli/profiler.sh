@@ -16,6 +16,7 @@ function profile() {
         console "Connections: $profiler_connections"
         console "Duration:    $profiler_duration"
         console "Rate:        $profiler_rate"
+        console ""
     fi
 
     # note "Generating auth token.."
@@ -41,15 +42,16 @@ function profile() {
             continue
         fi
 
-        note "Testing ${calls__name[$idx]}"
+        note "Testing '${calls__name[$idx]}'"
         cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -H 'AuthToken: ${AUTHTOKEN}' -s ${calls__script[$idx]} --latency ${base_url}${calls__path[$idx]}"
 
         if [ "${debug}" == "1" ]; then
-            note "URL: ${base_url}${calls__path[$idx]}"
-            note "Shell Cmd: ${cmd}"
+            console "URL: ${base_url}${calls__path[$idx]}"
+            console "Shell Cmd: ${cmd}"
         fi
 
         eval ${cmd} > ${output_dir}/${calls__name[$idx]}.log
+        console
         ((total++))
     done
 
