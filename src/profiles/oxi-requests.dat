@@ -1,8 +1,1 @@
-# The file can contain a list of requests which needs to be run against one or
-# more endpoints under the pre-configured domian. The file has following columns
-#  - [1, 0]   on/off for testing
-#  - [1,0]    is authtoken required
-#  - [string] request path
-#  - [string] post request script 
-#  - [string] output file name
-1   0	/oxiapi     reqBetPlace.lua     reqBetPlace
+1   0	/oxiapi     reqBetPlace.lua     reqBetPlace.log

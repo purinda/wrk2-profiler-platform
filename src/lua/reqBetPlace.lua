@@ -11,7 +11,7 @@ wrk.body   =[[
             <password>oxiapi</password>
     </reqClientAuth>
     <reqBetPlace pendingBetCount="Y" returnBalance="Y">
-        <token>{{token}}</token>
+        <token>y5AEZ/1PXFJ/6aaxLhmlD/Do2B9OqHBCow7kekEVU9LhdAkeV3fZKnnGKBbpVOaIvy6jUcaU2HzA/2d9Pt2eeux+ggfsSWsiPdq3oyKAmypmHPzQ4WYJfCWVTNr06LvgPnpXR93Trrs4</token>
         <errorDetail>ALL</errorDetail>
         <channel>M</channel>
         <fullDetails>Y</fullDetails>
@@ -26,7 +26,7 @@ wrk.body   =[[
                 <legType>W</legType>
                 <part>
                     <partNo>1</partNo>
-                    <outcome>400923087</outcome>
+                    <outcome>51819</outcome>
                     <partSort>--</partSort>
                     <priceType>L</priceType>
                     <priceNum>10000</priceNum>
@@ -34,7 +34,7 @@ wrk.body   =[[
                 </part>
                 <part>
                     <partNo>2</partNo>
-                    <outcome>400923084</outcome>
+                    <outcome>51822</outcome>
                     <partSort>--</partSort>
                     <priceType>L</priceType>
                     <priceNum>200</priceNum>
@@ -47,10 +47,10 @@ wrk.body   =[[
                 <legType>W</legType>
                 <part>
                     <partNo>1</partNo>
-                    <outcome>400924126</outcome>
+                    <outcome>51815</outcome>
                     <partSort>--</partSort>
                     <priceType>L</priceType>
-                    <priceNum>100</priceNum>
+                    <priceNum>3500</priceNum>
                     <priceDen>1000</priceDen>
                 </part>
             </leg>

@@ -24,12 +24,12 @@
 #                        in requests/sec (total)
 #                        [Required Parameter]
 CONNECTIONS=5
-DURATION=5s
-THREADS=2
-RATE=100
+DURATION=8s
+THREADS=1
+RATE=1
 
 # Domain name and path for request
-URL_PREFIX=http://sample-app
+URL_PREFIX=http://sbt.local:18080/sportsbet/
 
 # Print output for each requests
 SHOW_ON_TERMINAL=0

@@ -23,9 +23,6 @@ mkdir -p $FOLDER
 echo "===============================" >&2
 while read switch auth request parameter name ;
 do
-	echo "Name: $name"
-	echo "Request: $request"
-
 	if [ "$switch" == "1" ]; then
 		if [ "$auth" == "1" ] && [ -z ${AUTHTOKEN+x} ]; then
 			echo "AuthToken is not set. Skip request needs authentication" >&2
@@ -39,11 +36,11 @@ do
 			echo "Command: $CMD" >&2
 			eval $CMD
 		else
-			eval $CMD > $FOLDER/$name 
+			eval $CMD > $FOLDER/$name
 		fi
 		((TOTAL++))
 	fi
-done < ./profiles/sample-app.dat
+done < ./profiles/oxi-requests.dat
 
 echo "===============================" >&2
 echo "$TOTAL request(s) tested in total" >&2
