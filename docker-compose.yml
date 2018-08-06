@@ -1,0 +1,16 @@
+version: "2.3"
+
+services:
+    wrk2:
+        build: docker-wrk2
+        volumes:
+            - ./output:/tmp/results/
+            - ./:/opt/profiler/
+        tty: true
+    # Sample app is used for simulating request delays.
+    sample-app:
+        build: docker-sample-app
+        volumes:
+          - ./docker-sample-app/app:/usr/src/app
+        ports:
+          - 80:80

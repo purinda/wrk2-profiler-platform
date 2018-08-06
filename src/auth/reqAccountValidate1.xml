@@ -1,0 +1,13 @@
+<oxip version="6.0">
+  <request>
+    <reqClientAuth returnToken="N">
+      <user>oxiapi</user>
+      <password>oxiapi</password>
+    </reqClientAuth>
+    <reqAccountValidate1 returnBalance="N" returnRefererDetails="N" returnPreferences="N" returnAlias="N" returnLastLogin="N" updateLastLogin="N">
+      <userName mandatory="N" passwordProtected="N">orbissupport</userName>
+      <password>sports99</password>
+      <channel>M</channel>
+    </reqAccountValidate1>
+  </request>
+</oxip>
