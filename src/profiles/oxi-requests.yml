@@ -1,0 +1,24 @@
+--
+name: sample-app-profiling
+debug: 1
+histogram: 1
+base_url: http://sample-app
+profiler:
+  threads: 1
+  connections: 10
+  rate: 10
+  duration: 10
+
+calls:
+  -
+    name: reqBetBuild
+    active: 1
+    auth: 0
+    path: /oxiapi
+    script: src/profiles/lua/reqBetBuild.lua
+  -
+    name: reqBetPlace
+    active: 1
+    auth: 0
+    path: /oxiapi
+    script: src/profiles/lua/reqBetPlace.lua
