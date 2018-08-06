@@ -10,19 +10,22 @@ echo "Duration:    $DURATION" >&2
 echo "Rate:        $RATE" >&2
 
 echo "Generating AuthToken...." >&2
-curl -d@auth/reqAccountValidate1.xml http://web/sportsbet/oxiapi > auth/authtoken_response
+curl -d@auth/reqAccountValidate1.xml http://host.docker.internal/ > auth/authtoken_response
 AUTHTOKEN=$(grep '<token' auth/authtoken_response | cut -f2 -d">"|cut -f1 -d"<")
 echo "AuthToken: $AUTHTOKEN" >&2
 
 TOTAL=0
 TIMESTAMP=$(date +%Y%m%d_%H%M)
-FOLDER=/tmp/request_lt_result_$TIMESTAMP
+FOLDER=/tmp/results/request_lt_result_$TIMESTAMP
 mkdir -p $FOLDER
 
 # run wrk
 echo "===============================" >&2
 while read switch auth request parameter name ;
 do
+	echo "Name: $auth"
+	echo "Request: $request"
+
 	if [ "$switch" == "1" ]; then
 		if [ "$auth" == "1" ] && [ -z ${AUTHTOKEN+x} ]; then
 			echo "AuthToken is not set. Skip request needs authentication" >&2
@@ -40,7 +43,7 @@ do
 		fi
 		((TOTAL++))
 	fi
-done < ./profiles/oxi-requests.dat
+done < ./profiles/sample-app.dat
 
 echo "===============================" >&2
 echo "$TOTAL request(s) tested in total" >&2
