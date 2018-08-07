@@ -27,7 +27,7 @@ wrk.body   =[[
                     <legType>W</legType>
                   <part>
                       <partNo>1</partNo>
-                      <outcome>386207827</outcome>
+                      <outcome>51819</outcome>
                       <priceType>L</priceType>
                       <priceNum>200</priceNum>
                       <priceDen>1000</priceDen>

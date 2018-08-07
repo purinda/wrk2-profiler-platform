@@ -30,7 +30,7 @@ function profile() {
     mkdir -p ${output_dir}
 
     # Run wrk for each URL in the profile
-    for idx in $( seq 0 0 )
+    for idx in $( seq 0 ${calls__active[@]} )
     do
         if [ "${calls__active[$idx]}" == "0" ]; then
             continue
