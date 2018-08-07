@@ -9,6 +9,9 @@ app=`python -c "import os; print(os.path.dirname(os.path.realpath(\"$0\")))"`
 name="Wrk2 Profiler"
 version=`cat ${app}/var/version`
 
+# Default log file
+eval log="${app}/$0.log"
+
 # Runs the main app
 source "${app}/src/cli/cli.sh"
 cli_parse "$@"
