@@ -1,21 +1,15 @@
 --
-name: sample-app-profiling
+name: oxi-app-profiling
 debug: 1
 histogram: 1
-base_url: http://sample-app
+base_url: http://172.17.0.1/sportsbet/oxiapi
 profiler:
   threads: 1
-  connections: 10
+  connections: 1
   rate: 10
-  duration: 10
+  duration: 8s
 
 calls:
-  -
-    name: reqBetBuild
-    active: 1
-    auth: 0
-    path: /oxiapi
-    script: src/profiles/lua/reqBetBuild.lua
   -
     name: reqBetPlace
     active: 1

@@ -5,9 +5,9 @@ histogram: 1
 base_url: http://sample-app
 profiler:
   threads: 1
-  connections: 10
+  connections: 2
   rate: 10
-  duration: 10
+  duration: 10s
 
 calls:
   -
