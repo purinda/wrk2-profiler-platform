@@ -11,7 +11,7 @@ wrk.body   =[[
             <password>oxiapi</password>
     </reqClientAuth>
     <reqBetPlace pendingBetCount="Y" returnBalance="Y">
-        <token>y5AEZ/1PXFJ/6aaxLhmlD/Do2B9OqHBCow7kekEVU9LhdAkeV3fZKnnGKBbpVOaIvy6jUcaU2HzA/2d9Pt2eeux+ggfsSWsiPdq3oyKAmypmHPzQ4WYJfCWVTNr06LvgPnpXR93Trrs4</token>
+        <token>zMocQuYjdHwGvzy3c9AcHU7jgxJoO2czHr0K/RbAsC9Qsu3NH7Htfl4aYmev1q6+RFIV0St4lxLeGNjYEOvEk/uaE3PoPcmowLM/R3RHOCxzYNpts1hO42uTdzjOLfAY+mOz1rk6AJHS</token>
         <errorDetail>ALL</errorDetail>
         <channel>M</channel>
         <fullDetails>Y</fullDetails>
