@@ -28,31 +28,16 @@ class Auth(Resource):
             'result': ['success']
         }
 
-class AlmostNoDelay(Resource):
-    def get(self):
+class Delay(Resource):
+    def get(self, min, max):
         return {
-            'result': ['success']
-        }
-
-class RandomDelayRange1(Resource):
-    def get(self):
-        return {
-            'delay': random_delay(500, 1500),
-            'result': ['success']
-        }
-
-class RandomDelayRange2(Resource):
-    def get(self):
-        return {
-            'delay': random_delay(1000, 2500),
+            'delay': random_delay(min, max),
             'result': ['success']
         }
 
 # Create routes
 api.add_resource(Auth, '/auth')
-api.add_resource(AlmostNoDelay, '/noDelay')
-api.add_resource(RandomDelayRange1, '/delayRange1')
-api.add_resource(RandomDelayRange2, '/delayRange2')
+api.add_resource(Delay, '/delay/<int:min>/<int:max>')
 
 # Run the application
 if __name__ == '__main__':
