@@ -29,9 +29,9 @@ function profile() {
         fi
 
         # If authentication is required
-        if [ "$auth" == "1" ] && [ -z ${auth_token+x} ]; then
-            err "AuthToken is not set. Skip request needs authentication"
-            continue
+        if [ "${calls__auth[$idx]}" == "1" ] && [ -z ${auth_token+x} ]; then
+            err "Request needs authentication and token hasn't been generated."
+            exit
         fi
 
         out_n "Testing '${calls__name[$idx]}'.."
@@ -65,7 +65,6 @@ function mkdir_results() {
 }
 
 function generate_histogram() {
-    # Histogram
     if [ "${histogram}" == "0" ]; then
         note "Skip drawing HdrHistogram as result is not saved."
     else
