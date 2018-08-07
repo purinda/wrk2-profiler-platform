@@ -18,7 +18,7 @@ wrk.body   =[[
         <clientUserAgent>11</clientUserAgent>
         <bet>
             <betNo>1</betNo>
-            <stakePerLine>2000</stakePerLine>
+            <stakePerLine>2</stakePerLine>
             <betType>SGL</betType>
             <legType>W</legType>
             <leg>
@@ -29,7 +29,7 @@ wrk.body   =[[
                     <partNo>1</partNo>
                     <outcome>51819</outcome>
                     <priceType>L</priceType>
-                    <priceNum>2200</priceNum>
+                    <priceNum>300</priceNum>
                     <priceDen>1000</priceDen>
                 </part>
             </leg>
