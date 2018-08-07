@@ -19,11 +19,6 @@ function profile() {
         console ""
     fi
 
-    # note "Generating auth token.."
-    # curl -d@auth/reqAccountValidate1.xml http://sample-app/ > auth/authtoken_response
-    # AUTHTOKEN=$(grep '<token' auth/authtoken_response | cut -f2 -d">"|cut -f1 -d"<")
-    # console "AuthToken: $AUTHTOKEN"
-
     total=0
     timestamp=$(date +%Y%m%d_%H%M)
     output_dir=/tmp/results/${name}${timestamp}
@@ -43,7 +38,9 @@ function profile() {
         fi
 
         note "Testing '${calls__name[$idx]}'"
-        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -H 'AuthToken: ${AUTHTOKEN}' -s ${calls__script[$idx]} --latency ${base_url}${calls__path[$idx]}"
+        cmd="wrk -t${profiler_threads} -c${profiler_connections} 
+            -d${profiler_duration} -R${profiler_rate} -s ${calls__script[$idx]} 
+            --latency ${base_url}${calls__path[$idx]}"
 
         if [ "${debug}" == "1" ]; then
             console "URL: ${base_url}${calls__path[$idx]}"
