@@ -1,7 +1,9 @@
 # Import framework
-from flask import Flask
+from flask import Flask, request, url_for, jsonify, Response, abort
 from flask_restful import Resource, Api
-import time
+
+from datetime import datetime, time, date
+from time import sleep
 import random
 
 # Instantiate the app
@@ -18,18 +20,34 @@ def random_delay(min_ms=0, max_ms=1000):
     '''
 
     delay = random.randrange(min_ms, max_ms)
-    time.sleep(delay / 1000)
+    sleep(delay / 1000)
     return delay
+
+class AuthService():
+    def token(self):
+        return hash(time.min)
+
+    def validate(self):
+        if 'Authorization' not in request.headers:
+            abort(401)
+
+        if request.headers.get('Authorization') != hash(time.min):
+            abort(401)
 
 class Auth(Resource):
     def get(self):
+        auth = AuthService()
+
         return {
-            'token': hash(time.time()),
+            'token': auth.token(),
             'result': ['success']
         }
 
 class Delay(Resource):
     def get(self, min, max):
+        auth = AuthService()
+        auth.validate()
+
         return {
             'delay': random_delay(min, max),
             'result': ['success']
