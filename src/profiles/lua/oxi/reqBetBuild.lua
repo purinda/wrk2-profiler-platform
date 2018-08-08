@@ -1,5 +1,7 @@
 -- HTTP method, body, and adding a header
 
+wrk.method = "POST"
+wrk.headers["Content-Type"] = "application/xml"
 xml_body =[[
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE oxip SYSTEM "oxip.dtd">
@@ -58,3 +60,5 @@ xml_body =[[
     </request>
 </oxip>
 ]]
+
+wrk.body = xml_body

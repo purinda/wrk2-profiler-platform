@@ -1,6 +1,8 @@
 -- HTTP method, body, and adding a header
-
 token    = "/+MhZqYnQXOVddgKNlb/0Q1L1Dst2ytk7zbsXstRSKhFXYr5EgDa0na48DByGRl+AlC3z/B+yy1cDmrMvWme/wu6QsfkSRwvs89u/lE9a6wEakpHT5kFK8mFk1SpnK8C/hH1thO5a2Zy"
+
+wrk.method = "POST"
+wrk.headers["Content-Type"] = "application/xml"
 xml_body =[[
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE oxip SYSTEM "oxip.dtd">
