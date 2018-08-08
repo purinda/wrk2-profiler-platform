@@ -11,13 +11,7 @@ profiler:
 
 calls:
   -
-    name: reqBetPlace_SGL
-    active: 1
-    auth: 0
-    path: /oxiapi
-    script: src/profiles/lua/reqBetPlace_SGL.lua
-  -
-    name: reqBetPlace_SGM_MF
+    name: reqBetPlace
     active: 1
     auth: 0
     path: /oxiapi

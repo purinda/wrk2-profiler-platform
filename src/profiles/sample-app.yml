@@ -15,16 +15,16 @@ calls:
     active: 1
     auth: 0
     path: /delay/0/0
-    script: src/profiles/lua/sample-app/get.lua
+    script: src/profiles/lua/sample-app/auth.lua
   -
     name: delay_one_to_two
-    active: 1
+    active: 0
     auth: 0
     path: /delay/1000/2000
     script: src/profiles/lua/sample-app/get.lua
   -
     name: delay_one_to_three
-    active: 1
+    active: 0
     auth: 0
     path: /delay/1000/3000
     script: src/profiles/lua/sample-app/get.lua
