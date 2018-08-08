@@ -1,0 +1,210 @@
+--
+name: obmw-app-profiling
+debug: 1
+histogram: 1
+base_url: https://172.17.0.1:10151/sportsbet/obmw
+profiler:
+  threads: 1
+  connections: 1
+  rate: 10
+  duration: 8s
+
+calls:
+  -
+    name: competitions
+    active: 1
+    auth: 0
+    path: /sportsbook/competitions
+    script: src/profiles/lua/obmw/competitions.lua
+  -
+    name: competitions-X
+    active: 1
+    auth: 0
+    path: /sportsbook/competitions/100
+    script: src/profiles/lua/default.lua
+  -
+    name: competitions-results
+    active: 1
+    auth: 0
+    path: /sportsbook/competitions/results
+    script: src/profiles/lua/default.lua
+  -
+    name: events
+    active: 1
+    auth: 0
+    path: /sportsbook/events
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X-includeCashout-true
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100?includeCashout=true
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X-cashout
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100/cashout
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X-markets
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100/markets
+    script: src/profiles/lua/default.lua
+  -
+    name: events-commentary
+    active: 1
+    auth: 0
+    path: /sportsbook/events/commentary
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X-commentary
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100/commentary
+    script: src/profiles/lua/default.lua
+  -
+    name: events-keyevents
+    active: 1
+    auth: 0
+    path: /sportsbook/events/keyevents
+    script: src/profiles/lua/default.lua
+  -
+    name: events-X-results
+    active: 1
+    auth: 0
+    path: /sportsbook/events/100/results
+    script: src/profiles/lua/default.lua
+  -
+    name: racecard-X
+    active: 1
+    auth: 0
+    path: /sportsbook/racecard/100
+    script: src/profiles/lua/default.lua
+  -
+    name: meetings
+    active: 1
+    auth: 0
+    path: /sportsbook/meetings
+    script: src/profiles/lua/default.lua
+  -
+    name: meetings-X
+    active: 1
+    auth: 0
+    path: /sportsbook/meetings/100
+    script: src/profiles/lua/default.lua
+  -
+    name: meetings-results
+    active: 1
+    auth: 0
+    path: /sportsbook/meetings/results
+    script: src/profiles/lua/default.lua
+  -
+    name: meetings-nextdays-X
+    active: 1
+    auth: 0
+    path: /sportsbook/meetings/nextdays/100
+    script: src/profiles/lua/default.lua
+  -
+    name: navhierarchy
+    active: 1
+    auth: 0
+    path: /sportsbook/navhierarchy
+    script: src/profiles/lua/default.lua
+  -
+    name: navhierarchy-sports
+    active: 1
+    auth: 0
+    path: /sportsbook/navhierarchy/sports
+    script: src/profiles/lua/default.lua
+  -
+    name: navhierarchy-racing
+    active: 1
+    auth: 0
+    path: /sportsbook/navhierarchy/racing
+    script: src/profiles/lua/default.lua
+  -
+    name: time
+    active: 1
+    auth: 0
+    path: /time
+    script: src/profiles/lua/default.lua
+  -
+    name: pools
+    active: 1
+    auth: 0
+    path: /sportsbook/pools
+    script: src/profiles/lua/default.lua
+  -
+    name: pools-X
+    active: 1
+    auth: 0
+    path: /sportsbook/pools/100
+    script: src/profiles/lua/default.lua
+  -
+    name: all_racing
+    active: 1
+    auth: 0
+    path: /sportsbook/all_racing
+    script: src/profiles/lua/default.lua
+  -
+    name: mobile-sportsbook-racecard-X
+    active: 1
+    auth: 0
+    path: /mobile/sportsbook/racecard/100
+    script: src/profiles/lua/default.lua
+  -
+    name: mobile-sportsbook-racecardmeeting-X
+    active: 1
+    auth: 0
+    path: /mobile/sportsbook/racecardmeeting/100
+    script: src/profiles/lua/default.lua
+  -
+    name: mobile-sportsbook-pool-X
+    active: 1
+    auth: 0
+    path: /mobile/sportsbook/pool/100
+    script: src/profiles/lua/default.lua
+  -
+    name: history-bets
+    active: 1
+    auth: 1
+    path: /history/bets
+    script: src/profiles/lua/default.lua
+  -
+    name: history-transactions
+    active: 1
+    auth: 1
+    path: /history/transactions
+    script: src/profiles/lua/default.lua
+  -
+    name: history-bet-X
+    active: 1
+    auth: 1
+    path: /history/bet/100
+    script: src/profiles/lua/default.lua
+  -
+    name: history-partition-X
+    active: 1
+    auth: 1
+    path: /history/partition/100
+    script: src/profiles/lua/default.lua
+  -
+    name: history-event-X
+    active: 1
+    auth: 1
+    path: /history/event/100
+    script: src/profiles/lua/default.lua
+  -
+    name: settings-cashout
+    active: 1
+    auth: 0
+    path: /settings/cashout
+    script: src/profiles/lua/default.lua

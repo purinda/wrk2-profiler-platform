@@ -22,3 +22,9 @@ calls:
     auth: 0
     path: /delayRange1
     script: src/profiles/lua/sample-app.lua
+  -
+    name: delay_range_2
+    active: 1
+    auth: 0
+    path: /delayRange2
+    script: src/profiles/lua/sample-app.lua
