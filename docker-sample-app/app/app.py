@@ -1,6 +1,8 @@
 # Import framework
 from flask import Flask, request, url_for, jsonify, Response, abort
 from flask_restful import Resource, Api
+import logging 
+from flask.logging import default_handler
 
 from datetime import datetime, time, date
 from time import sleep
@@ -9,6 +11,19 @@ import random
 # Instantiate the app
 app = Flask(__name__)
 api = Api(app)
+
+class RequestFormatter(logging.Formatter):
+    def format(self, record):
+        record.url = request.url
+        record.remote_addr = request.remote_addr
+        return super().format(record)
+
+formatter = RequestFormatter(
+    '[%(asctime)s] %(remote_addr)s requested %(url)s\n'
+    '%(levelname)s in %(module)s: %(message)s'
+)
+
+default_handler.setFormatter(formatter)
 
 def random_delay(min_ms=0, max_ms=1000):
     '''
@@ -25,13 +40,22 @@ def random_delay(min_ms=0, max_ms=1000):
 
 class AuthService():
     def token(self):
-        return hash(time.min)
+        token = hash(time.min)
+        app.logger.info('Token generated %s', token)
+        return token
 
     def validate(self):
+        valid_token = hash(time.min)
+
+        # Check if auth header is set in the request
         if 'Authorization' not in request.headers:
             abort(401)
 
-        if request.headers.get('Authorization') != hash(time.min):
+        token = request.headers.get('Authorization')
+        app.logger.info('Valid Token: "%s"', valid_token)
+        app.logger.info('Received Token: "%s"', token)
+
+        if str(token) != str(valid_token):
             abort(401)
 
 class Auth(Resource):
