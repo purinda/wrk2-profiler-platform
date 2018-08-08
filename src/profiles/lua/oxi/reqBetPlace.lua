@@ -1,6 +1,6 @@
 -- HTTP method, body, and adding a header
 
-token    = ""
+token    = "/+MhZqYnQXOVddgKNlb/0Q1L1Dst2ytk7zbsXstRSKhFXYr5EgDa0na48DByGRl+AlC3z/B+yy1cDmrMvWme/wu6QsfkSRwvs89u/lE9a6wEakpHT5kFK8mFk1SpnK8C/hH1thO5a2Zy"
 xml_body =[[
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE oxip SYSTEM "oxip.dtd">
@@ -18,7 +18,7 @@ xml_body =[[
             <clientUserAgent>11</clientUserAgent>
             <bet>
                 <betNo>1</betNo>
-                <stakePerLine>2</stakePerLine>
+                <stakePerLine>1</stakePerLine>
                 <betType>SGL</betType>
                 <legType>W</legType>
                 <leg>
@@ -27,9 +27,9 @@ xml_body =[[
                     <legType>W</legType>
                     <part>
                         <partNo>1</partNo>
-                        <outcome>51819</outcome>
+                        <outcome>51813</outcome>
                         <priceType>L</priceType>
-                        <priceNum>300</priceNum>
+                        <priceNum>1200</priceNum>
                         <priceDen>1000</priceDen>
                     </part>
                 </leg>
@@ -39,6 +39,4 @@ xml_body =[[
 </oxip>
 ]]
 
-base = loadfile("base.lua")
-base()
 wrk.body = xml_body
