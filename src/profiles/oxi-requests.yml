@@ -16,3 +16,9 @@ calls:
     auth: 0
     path: /oxiapi
     script: /opt/profiler/src/profiles/lua/oxi/reqBetPlace.lua
+  -
+    name: reqBetPlace
+    active: 1
+    auth: 0
+    path: /oxiapi
+    script: /opt/profiler/src/profiles/lua/oxi/reqBetPlace.lua

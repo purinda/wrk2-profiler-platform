@@ -11,6 +11,7 @@ import random
 # Instantiate the app
 app = Flask(__name__)
 api = Api(app)
+auth = False
 
 class RequestFormatter(logging.Formatter):
     def format(self, record):
@@ -45,6 +46,10 @@ class AuthService():
         return token
 
     def validate(self):
+        # Do we need to authenticate?
+        if (False == auth):
+            return True
+
         valid_token = hash(time.min)
 
         # Check if auth header is set in the request

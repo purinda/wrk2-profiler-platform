@@ -4,9 +4,9 @@ debug: 1
 histogram: 1
 base_url: http://sample-app
 profiler:
-  threads: 1
-  connections: 1
-  rate: 1
+  threads: 2
+  connections: 5
+  rate: 10
   duration: 5
 
 calls:
@@ -15,16 +15,16 @@ calls:
     active: 1
     auth: 0
     path: /delay/0/0
-    script: /opt/profiler/src/profiles/lua/sample-app/auth.lua
+    script: /opt/profiler/src/profiles/lua/sample-app/get.lua
   -
     name: delay_one_to_two
-    active: 0
+    active: 1
     auth: 0
     path: /delay/1000/2000
     script: /opt/profiler/src/profiles/lua/sample-app/get.lua
   -
     name: delay_one_to_three
-    active: 0
+    active: 1
     auth: 0
     path: /delay/1000/3000
     script: /opt/profiler/src/profiles/lua/sample-app/get.lua
