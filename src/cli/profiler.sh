@@ -35,7 +35,7 @@ function profile() {
         fi
 
         out_n "Testing '${calls__name[$idx]}'.."
-        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --latency ${base_url}${calls__path[$idx]}"
+        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --u_latency ${base_url}${calls__path[$idx]}"
         eval ${cmd} > ${output_dir}/${calls__name[$idx]}.log
         is_ok
 

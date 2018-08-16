@@ -7,7 +7,7 @@ profiler:
   threads: 5
   connections: 5
   rate: 10
-  duration: 10
+  duration: 50
 
 calls:
   -
