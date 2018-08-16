@@ -4,10 +4,10 @@ debug: 1
 histogram: 1
 base_url: http://sample-app
 profiler:
-  threads: 5
-  connections: 5
-  rate: 10
-  duration: 50
+  threads: 2
+  connections: 2
+  rate: 5
+  duration: 30
 
 calls:
   -

@@ -36,8 +36,12 @@ function profile() {
 
         out_n "Testing '${calls__name[$idx]}'.."
         cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --u_latency ${base_url}${calls__path[$idx]}"
-        eval ${cmd} > ${output_dir}/${calls__name[$idx]}.log
+        eval ${cmd} > ${output_dir}/${calls__name[$idx]}
+        remove_corrected_latency_data ${output_dir}/${calls__name[$idx]} ${output_dir}/${calls__name[$idx]}.log
         is_ok
+
+        # Get rid of the original histogram data with corrected latency
+        rm ${output_dir}/${calls__name[$idx]}
 
         if [ "${debug}" == "1" ]; then
             out "URL: ${base_url}${calls__path[$idx]}"
@@ -53,6 +57,11 @@ function profile() {
 
     out "Results in ${output_dir}"
     out "Done"
+}
+
+function remove_corrected_latency_data() {
+    separator="-\{58\}"
+    sed "/^w+/,/${separator}/d" $1 > $2
 }
 
 function mkdir_results() {
