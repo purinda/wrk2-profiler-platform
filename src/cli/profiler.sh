@@ -34,11 +34,14 @@ function profile() {
             exit
         fi
 
-        out_n "Testing '${calls__name[$idx]}'.."
+        out_n "Profiling '${calls__name[$idx]}'.."
         cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --u_latency ${base_url}${calls__path[$idx]}"
         eval ${cmd} > ${output_dir}/${calls__name[$idx]}
         remove_corrected_latency_data ${output_dir}/${calls__name[$idx]} ${output_dir}/${calls__name[$idx]}.log
         is_ok
+
+        out_n "Validating results '${calls__name[$idx]}'.."
+        validate_result ${output_dir}/${calls__name[$idx]}.log
 
         # Get rid of the original histogram data with corrected latency
         rm ${output_dir}/${calls__name[$idx]}
@@ -61,7 +64,7 @@ function profile() {
 
 function remove_corrected_latency_data() {
     separator="-\{58\}"
-    sed "/^w+/,/${separator}/d" $1 > $2
+    sed "/Running/,/${separator}/d" $1 > $2
 }
 
 function mkdir_results() {
@@ -71,6 +74,20 @@ function mkdir_results() {
     mkdir -p ${output_dir}
     is_ok
     out ""
+}
+
+function validate_result() {
+    logfile=$1
+
+    # Check if the results are empty
+    if [ -s "$logfile" ]; then
+        err "Profiler output cannot be used for graphing. Reduce threads or increase the duration of the test."
+    fi
+
+    # Check if the NaN (not a number) output was produced
+    if [[ $logfile =~ '/nan/i' ]]; then
+        
+    fi
 }
 
 function generate_histogram() {

@@ -1,13 +1,13 @@
 --
 name: sample-app-profiling
-debug: 1
+debug: 0
 histogram: 1
 base_url: http://sample-app
 profiler:
-  threads: 2
-  connections: 2
+  threads: 1
+  connections: 10
   rate: 5
-  duration: 30
+  duration: 5
 
 calls:
   -
