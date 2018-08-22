@@ -36,13 +36,13 @@ calls:
     script: src/profiles/lua/default.lua
   -
     name: events-X
-    active: 1
+    active: 0
     auth: 0
     path: /sportsbook/events/100
     script: src/profiles/lua/default.lua
   -
     name: events-X-includeCashout-true
-    active: 1
+    active: 0
     auth: 0
     path: /sportsbook/events/100?includeCashout=true
     script: src/profiles/lua/default.lua
@@ -114,13 +114,13 @@ calls:
     script: src/profiles/lua/default.lua
   -
     name: navhierarchy
-    active: 1
+    active: 0
     auth: 0
     path: /sportsbook/navhierarchy
     script: src/profiles/lua/default.lua
   -
     name: navhierarchy-sports
-    active: 1
+    active: 0
     auth: 0
     path: /sportsbook/navhierarchy/sports
     script: src/profiles/lua/default.lua

@@ -35,10 +35,15 @@ function profile() {
         fi
 
         out_n "Profiling '${calls__name[$idx]}'.."
-        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --u_latency ${base_url}${calls__path[$idx]}"
-        eval ${cmd} > ${output_dir}/${calls__name[$idx]}
-        remove_corrected_latency_data ${output_dir}/${calls__name[$idx]} ${output_dir}/${calls__name[$idx]}.log
+        cmd="wrk -t${profiler_threads} -c${profiler_connections} -d${profiler_duration} -R${profiler_rate} -s${calls__script[$idx]} --u_latency \"${base_url}${calls__path[$idx]}\""
+        eval "${cmd}" > "${output_dir}/${calls__name[$idx]}"
+        remove_corrected_latency_data "${output_dir}/${calls__name[$idx]}" "${output_dir}/${calls__name[$idx]}.log"
         is_ok
+
+        if [ "${debug}" == "1" ]; then
+            out "URL: ${base_url}${calls__path[$idx]}"
+            out "Cmd: ${cmd}"
+        fi
 
         out_n "Validating results.."
         validate_result "${output_dir}/${calls__name[$idx]}.log"
@@ -46,11 +51,6 @@ function profile() {
 
         # Get rid of the original histogram data with corrected latency
         rm ${output_dir}/${calls__name[$idx]}
-
-        if [ "${debug}" == "1" ]; then
-            out "URL: ${base_url}${calls__path[$idx]}"
-            out "Cmd: ${cmd}"
-        fi
 
         out ""
         ((total++))
