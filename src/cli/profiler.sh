@@ -40,8 +40,9 @@ function profile() {
         remove_corrected_latency_data ${output_dir}/${calls__name[$idx]} ${output_dir}/${calls__name[$idx]}.log
         is_ok
 
-        out_n "Validating results '${calls__name[$idx]}'.."
-        validate_result ${output_dir}/${calls__name[$idx]}.log
+        out_n "Validating results.."
+        validate_result "${output_dir}/${calls__name[$idx]}.log"
+        is_ok
 
         # Get rid of the original histogram data with corrected latency
         rm ${output_dir}/${calls__name[$idx]}
@@ -80,14 +81,15 @@ function validate_result() {
     logfile=$1
 
     # Check if the results are empty
-    if [ -s "$logfile" ]; then
+    if [ ! -s "$logfile" ]; then
         err "Profiler output cannot be used for graphing. Reduce threads or increase the duration of the test."
+        out ""
+        exit 1
     fi
 
-    # Check if the NaN (not a number) output was produced
-    if [[ $logfile =~ '/nan/i' ]]; then
-        
-    fi
+    # # Check if the NaN (not a number) output was produced
+    # if [[ $logfile =~ '/nan/i' ]]; then
+    # fi
 }
 
 function generate_histogram() {
