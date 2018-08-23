@@ -41,8 +41,8 @@ function profile() {
         is_ok
 
         if [ "${debug}" == "1" ]; then
-            out "URL: ${base_url}${calls__path[$idx]}"
-            out "Cmd: ${cmd}"
+            note "URL: ${base_url}${calls__path[$idx]}"
+            note "Cmd: ${cmd}"
         fi
 
         out_n "Validating results.."
