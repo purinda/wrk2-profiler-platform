@@ -51,7 +51,7 @@ message()
 }
 
 if [ $helpFlagFound -eq 1 ]; then
-	message "Usage: make_percentile_plot [-o output_file] [-s sla_file] histogram_file ..."
+	message "Usage: make_percentile_plot [-m max_y_value] [-o output_file] [-s sla_file] histogram_file ..."
 	exit 255
 fi
 
@@ -61,7 +61,7 @@ echo "100.0		0.0	99%" 		>> ./xlabels.dat
 echo "1000.0	0.0	99.9%" 		>> ./xlabels.dat
 echo "10000.0	0.0	99.99%" 	>> ./xlabels.dat
 
-IndividualFilePlotCommands="'./xlabels.dat' with labels center offset 0, 1.5 point"
+IndividualFilePlotCommands="'./xlabels.dat' with labels center offset 0, -1 point"
 for file in $FILES; do
 	IndividualFilePlotCommands="$IndividualFilePlotCommands, '$file' using 4:1 with lines"
 done
@@ -86,7 +86,8 @@ message $IndividualFilePlotCommands
         echo "set output '$OUTPUT_FILENAME'"
     fi
     echo "set logscale x"
-    echo "unset xtics"
+    echo "set xtics scale 0"
+    echo "set format x ''"
     echo "$maxvalue"
     echo "set key top left"
     echo "set style line 1 lt 1 lw 3 pt 3 linecolor rgb \"red\""
