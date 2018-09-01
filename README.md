@@ -53,9 +53,9 @@ calls:
 - `name` is the profile name, which is used as the output directory name which will contain results
 of all tests (each item in `calls` is a test).
 - `debug` on/off verbose output when the profiler is run.
-- `histogram` on/off switch for producing an svg of each call. This is useful for visualising histogram data
+- `histogram` on/off switch for producing a SVG graph of each call. This is useful for visualising histogram data
 - `base_url` as field name suggests, this should contain the hostname of the HTTP service you are testing.
-Later this hostname and path of each test is concatanated to produce the unique test URL.
+Later this hostname and path of each test is concatenated to produce the unique test URL.
 which the tool outputs.
 - `profiler` is an array. Contains parameters for running each test under `calls`.
   - `threads` number of threads to use for running a test.
