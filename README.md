@@ -15,7 +15,7 @@ More information in [wiki](https://wiki.openbet.com/display/SBT/API+request+prof
 1. Clone the repository
 
 ```sh
-$ git clone ssh://git@stash.int.openbet.com:7999/sbt/application-profiler.git application-profiler
+$ git clone git@github.com:purinda/wrk2-profiler-platform.git application-profiler
 ```
 
 2. Start the docker app
